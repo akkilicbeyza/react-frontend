@@ -1,0 +1,14 @@
+.buton{
+    outline: none;
+    width: max-content;
+    background-color: #FF69B4;
+    color: white;
+    box-sizing: border-box;
+    padding: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+.buton:hover{
+    background-color: #FF1493;
+}
