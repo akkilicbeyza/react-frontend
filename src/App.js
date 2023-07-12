@@ -5,7 +5,6 @@ import Form from './components/form/Form';
 import { useState } from 'react';
 import axios from 'axios';
 
-
 function App() {
   const [user, setUser] = useState({name: "", password: ""})
   const handleChange = (e) => {
@@ -47,6 +46,29 @@ function App() {
         console.log(error)
       })
     }
+
+
+    const handleSave = (e) => {
+      e.preventDefault();
+
+      const url = 'https://localhost:44368/api/User/registration';
+      const data = {
+        UserName : user.namme,
+        Password: user.passwordd
+      }
+
+      axios.post(url,data)
+      .then((result) => {
+
+        const dt = result.data;
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    }
+
+
   };
   return (
     <div className="App">
