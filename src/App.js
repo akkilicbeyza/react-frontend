@@ -3,30 +3,48 @@ import Input from './components/input/Input'; //o componentsi kullanmak için ya
 import Button from './components/button/Button';
 import Form from './components/form/Form';
 import { useState } from 'react';
-
 import axios from 'axios';
 
 function App() {
-  const [user, setUser] = useState({ namme:"", passwordd:"" })
+  const [user, setUser] = useState({name: "", password: ""})
   const handleChange = (e) => {
     if(e.target.type === "text"){
-    setUser({...user, namme:e.target.value})
+    setUser({...user, name:e.target.value})
     console.log(user);
     }
     else {
-      setUser({...user, passwordd:e.target.value})
+      setUser({...user, password:e.target.value})
       console.log(user);
     }
   };
   const handleClick = () => {
-    if(user.namme === ""){
+    if(user.name === ""){
       alert("user name cannot be empty");
     }
-    else if(user.passwordd === ""){
+    else if(user.password === ""){
       alert("password cannot be empty");
     }
     else{
-      alert("user name: " + user.namme + " password: " + user.passwordd);
+      alert("user name: " + user.name + " password: " + user.password);
+    }
+
+
+    const handleSave = (e) => {
+      e.preventDefault();
+
+      const url = 'https://localhost:44368/Auth/Authenticate';
+      const data = {
+        UserName : user.name,
+        Password : user.password
+      }
+  
+      axios.post(url, data)
+      .then((result) => {
+        const dt = result.data;
+        })
+      .catch((error) => {
+        console.log(error)
+      })
     }
 
 
@@ -56,8 +74,8 @@ function App() {
     <div className="App">
       <h2>WELCOME!</h2>  
       <Form>
-        <Input type={"text"} value={user.namme} placeHolder={"user name"} onChange={handleChange} />
-        <Input type={"password"} value={user.passwordd} placeHolder={"password"} onChange={handleChange} />
+        <Input type={"text"} value={user.name} placeHolder={"user name"} onChange={handleChange} />
+        <Input type={"password"} value={user.password} placeHolder={"password"} onChange={handleChange} />
         <Button onClick={handleClick} />
       </Form>
     </div>
