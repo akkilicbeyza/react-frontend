@@ -1,0 +1,40 @@
+.PageList{
+    margin-top: 50px;
+    width: 60%;
+    margin-left: 280px;
+    text-align: center;
+}
+.PageList th, .PageList td{
+    padding: 8px;
+}
+.PageList th{
+    text-align: center;
+    background-color: #f2f2f2;
+}
+.PageList tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+.btn-update{
+    height: 25px;
+    width: 80px;
+    border-radius: 4px;
+    border-color: #ffcc00;
+    background-color: #ffcc00;
+    font-family:'Times New Roman', Times, serif;
+}
+.btn-delete{
+    height: 25px;
+    width: 80px;
+    border-radius: 4px;
+    border-color:  #ff3300    ;
+    background-color:  #ff3300 ;
+    font-family:'Times New Roman', Times, serif;
+}
+.btn-create{
+    height: 25px;
+    width: 80px;
+    border-radius: 4px;
+    border-color:  #33cc33    ;
+    background-color:  #33cc33 ;
+    font-family:'Times New Roman', Times, serif;
+}

@@ -1,62 +1,21 @@
 import './App.css';
-import Input from './components/input/Input'; //o componentsi kullanmak için yapıyoruz bunu
-import Button from './components/button/Button';
-import Form from './components/form/Form';
-import { useState } from 'react';
-import axios from 'axios';
+import PageList from './components/pages/PageList';
+import HomeScreen from './components/pages/HomeScreen';
+import { Routes, Route } from 'react-router-dom';
+import UpdateUser from './components/pages/UpdateUser';
+import CreateUser from './components/pages/CreateUser';
 
 
 function App() {
-  const [user, setUser] = useState({name: "", password: ""})
-  const handleChange = (e) => {
-    if(e.target.type === "text"){
-    setUser({...user, name:e.target.value})
-    console.log(user);
-    }
-    else {
-      setUser({...user, password:e.target.value})
-      console.log(user);
-    }
-  };
-  const handleClick = () => {
-    if(user.name === ""){
-      alert("user name cannot be empty");
-    }
-    else if(user.password === ""){
-      alert("password cannot be empty");
-    }
-    else{
-      alert("user name: " + user.name + " password: " + user.password);
-    }
 
 
-    const handleSave = (e) => {
-      e.preventDefault();
-
-      const url = 'https://localhost:44368/Auth/Authenticate';
-      const data = {
-        UserName : user.name,
-        Password : user.password
-      }
-  
-      axios.post(url, data)
-      .then((result) => {
-        const dt = result.data;
-        })
-      .catch((error) => {
-        console.log(error)
-      })
-    }
-  };
   return (
-    <div className="App">
-      <h2>WELCOME!</h2>  
-      <Form>
-        <Input type={"text"} value={user.name} placeHolder={"user name"} onChange={handleChange} />
-        <Input type={"password"} value={user.password} placeHolder={"password"} onChange={handleChange} />
-        <Button onClick={handleClick} />
-      </Form>
-    </div>
+      <Routes>
+        <Route path='/' element={<HomeScreen></HomeScreen>}></Route>
+        <Route path='/pagelist' element={<PageList></PageList>}></Route>
+        <Route path='/updateuser' element={<UpdateUser></UpdateUser>}></Route>
+        <Route path='/createuser' element={<CreateUser></CreateUser>}></Route>
+      </Routes>
   );
 }
 
