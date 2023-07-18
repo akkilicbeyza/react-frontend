@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function HomeScreen() {
-  const [user, setUser] = useState({name: "", password: ""})
+  const [user, setUser] = useState({name: "", password: "", email: ""})
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -16,13 +16,13 @@ function HomeScreen() {
     setUser({...user, name:e.target.value})
     console.log(user);
     }
-    else {
+    else if (e.target.type === "password"){
       setUser({...user, password:e.target.value})
       console.log(user);
     }
-  };
-  const handleClick = () => {
-    navigate('/pagelist');
+    else {
+      setUser({...user, email:e.target.value})
+    }
   };
 
   const handleSave = (e) => {
@@ -30,6 +30,7 @@ function HomeScreen() {
 
     const url = 'https://localhost:44368/api/User/registration';
     const data = {
+      Email : user.email,
       UserName : user.name,
       Password : user.password
     }
@@ -37,21 +38,30 @@ function HomeScreen() {
     axios.post(url, data)
     .then((result) => {
       const dt = result.data;
+          navigate('/pagelist');
+
       })
     .catch((error) => {
-      console.log(error)
-    })
+      if (error.response) {
+        console.log('Server responded with status code:', error.response.status);
+        console.log('Response data:', error.response.data);
+      } else if (error.request) {
+        console.log('No response received:', error.request);
+      } else {
+        console.log('Error creating request:', error.message);
+      }
+      })
   };
 
   return (
     <div className="HomeScreen">
       <h2>WELCOME!</h2>  
       <Form>
+      <Input type={"email"} value={user.email} placeHolder={"e-mail"} onChange={handleChange} />
         <Input type={"text"} value={user.name} placeHolder={"user name"} onChange={handleChange} />
         <Input type={"password"} value={user.password} placeHolder={"password"} onChange={handleChange} />
-        <Button onClick={handleSave} />
+        <Button onClick={(e) => handleSave(e)} />
         <br></br>
-        <Button onClick={handleClick}>geç</Button>
       </Form>
     </div>
   );
