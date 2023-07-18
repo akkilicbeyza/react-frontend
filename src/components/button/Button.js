@@ -2,12 +2,23 @@ import React from 'react'
 import "./button.css"
 
 
-
-  
-function Button({onClick}) {
+function Button({ onClick }) {
   return (
-        <button className="buton" onClick={onClick}>Create Account</button>
+    <button className="buton" onClick={onClick}>Create Account</button>
   )
 }
 
-export default Button
+function LoginButton({ onClick }) {
+  return (
+    <button className="buton" onClick={onClick}>Login</button>
+  )
+}
+
+function BackButton({ onClick }) {
+  return (
+    <button className="buton" onClick={onClick}>Go Back</button>
+  )
+}
+
+
+export { Button, LoginButton, BackButton }
