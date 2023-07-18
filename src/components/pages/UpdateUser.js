@@ -7,7 +7,7 @@ function UpdateUser() {
 
   return (
     <div className='UpdateUser'>
-        <h2>helllllllllllllllllllloooooooooooğğğğğğğğğğğğğğ</h2>
+        <h2>update user</h2>
     </div>
     );
 }
