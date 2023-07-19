@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
 import axios from 'axios';
-import { BackButton } from './button/Button';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -39,6 +38,12 @@ function Login() {
                 //clear();
                 const dt = result.data;
                 alert(dt.statusMessage);
+                if (dt.statusMessage === "Login succesful") {
+                    navigate('/admintable')
+                }
+                else{
+                    navigate('/login')
+                }
             })
             .catch((error) => {
                 if (error.response) {
@@ -56,6 +61,8 @@ function Login() {
 
     return (
         <form>
+            <h2>LOGIN</h2>
+
             <div class="form-outline mb-4">
                 <input type="text" id="form2Example1" class="form-control" onChange={handleChange} />
                 <label class="form-label" for="form2Example1">Username</label>
@@ -67,31 +74,10 @@ function Login() {
             </div>
 
             <button type="button" class="btn btn-primary btn-block mb-4" onClick={(e) => handleLogin(e)}>Sign in</button>
+            <button type="button" class="btn btn-primary btn-block mb-4" onClick={() => navigate('/')}>Create Account</button>
 
-            <div class="text-center">
-                <p>Not a member? <a href="#!">Register</a></p>
-                <p>or sign up with:</p>
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-google"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fab fa-github"></i>
-                </button>
-
-                <BackButton onClick={() => navigate(-1)} />
-
-            </div>
         </form>
-    )
+    );
 }
 
 export default Login;

@@ -88,7 +88,7 @@ function Registration() {
             </Form>
         </div>
 
-    )
+    );
 }
 
 export default Registration;
