@@ -265,7 +265,7 @@ const AdminTable = () => {
                   <tr key={index + 1}>
                     <td>{item.id}</td>
                     <td>{item.id}</td>
-                    <td>{item.name}</td>
+                    <td>{item.userName}</td>
                     <td>{item.email}</td>
                     <td>{item.password}</td>
                     <td>{item.isActive}</td>
