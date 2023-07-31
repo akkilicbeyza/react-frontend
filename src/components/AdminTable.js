@@ -103,14 +103,9 @@ const AdminTable = () => {
 
   const handleSave = (e) => {
 
-    if (user.name === "") {
-      alert("username cannot be empty");
-    }
-    else if (user.password === "") {
-      alert("password cannot be empty");
-    }
-    else if (user.email === "") {
-      alert("Email cannot be empty");
+    //handle blank 
+    if (user.name === "" || user.password === "" || user.email === "") {
+      alert("Username, password or email can not be empty");
     }
 
 

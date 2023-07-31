@@ -1,5 +1,5 @@
 import '../App.css';
-import Input from './input/Input'; //o componentsi kullanmak için yapıyoruz bunu
+import Input from './input/Input';
 import { Button, LoginButton } from './button/Button';
 import Form from './form/Form';
 import { useState } from 'react';
@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Registration() {
+
+    const [message, setMessage] = useState("") //for email validation
+    const [isValidPassword, setIsValidPassword] = useState(true); //for password validation
+
 
     const [user, setUser] = useState({ name: "", password: "", email: "" })
     const handleChange = (e) => {
@@ -34,17 +38,30 @@ function Registration() {
     const handleSave = (e) => {
         e.preventDefault();
 
-        if (user.name === "") {
-            alert("username cannot be empty");
-        }
-        else if (user.password === "") {
-            alert("password cannot be empty");
-        }
-        else if (user.email === "") {
-            alert("Email cannot be empty");
+        //handle blank 
+        if (user.name === "" || user.password === "" || user.email === "") {
+            alert("Username, password or email can not be empty");
         }
 
+        //email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+        if (emailPattern.test(user.email)) {
+            setMessage("Email is valid")
+        }
+        else if (!emailPattern.test(user.email) && user.email != "") {
+            setMessage("Please enter a valid email address.")
+        }
+        else {
+            setMessage("")
+        }
+
+        // Password must be at least 8 characters long, contain at least one uppercase letter,
+        // one lowercase letter, and one digit.
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        setIsValidPassword(passwordPattern.test(user.password));
+
+        //connection with api
         const url = 'https://localhost:44368/api/User/registration';
         const data = {
             Email: user.email,
@@ -86,6 +103,16 @@ function Registration() {
                 <Button onClick={(e) => handleSave(e)} />
                 <LoginButton onClick={() => navigate('/login')} />
             </Form>
+            <p className='message'>{message}</p>
+
+            {isValidPassword ? null : (
+                <div style={{ color: 'red' }}>
+                    Password must be at least 8 characters long, contain at least one uppercase letter,
+                    one lowercase letter, and one digit.
+                </div>
+            )}
+
+
         </div>
 
     );
